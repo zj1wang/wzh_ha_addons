@@ -1,12 +1,42 @@
-#!/bin/bash
+#!/bin/sh
 
-# 设置环境变量
-export V2RAYA_LOG_LEVEL=${V2RAYA_LOG_LEVEL:-info}
-export V2RAYA_CONFIG=${V2RAYA_CONFIG:-/config}
+# 创建必要的目录
+mkdir -p /etc/v2raya
+mkdir -p /var/log/v2raya
 
-# 创建配置目录
-mkdir -p $V2RAYA_CONFIG
+# 生成默认的V2Ray配置文件
+cat > /etc/v2raya/v2ray.json << EOF
+{
+  "log": {
+    "access": "/var/log/v2raya/access.log",
+    "error": "/var/log/v2raya/error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 1080,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      }
+    },
+    {
+      "port": 1081,
+      "protocol": "http",
+      "settings": {
+        "auth": "noauth"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
 
-# 启动v2raya服务
-echo "Starting v2raya service..."
-/usr/local/bin/v2raya -l 0.0.0.0:2017
+# 启动supervisord
+exec supervisord -c /etc/supervisor/conf.d/supervisord.conf

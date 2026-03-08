@@ -1,44 +1,24 @@
-# v2rayA Home Assistant Add-on
-
-name: v2rayA
-version: "1.0.0"
-description: A modern web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan, NaiveProxy, HTTP(S) and SSH
+name: V2rayA
+version: 1.0.0
+description: V2rayA is a modern web GUI client for V2Ray
 slug: v2raya
-url: https://github.com/mzz2017/v2rayA
+url: https://github.com/v2rayA/v2rayA
 arch:
   - amd64
   - armhf
   - armv7
   - aarch64
-init: false
 startup: services
 boot: auto
+host_network: true
 ports:
   2017/tcp: 2017
-host_network: false
 map:
+  - share:rw
   - config:rw
-environment:
-  V2RAYA_LOG_LEVEL: info
-  V2RAYA_CONFIG: /config
 options:
-  log_level:
-    name: Log Level
-    description: Set the log level for v2rayA
-    default: info
-    example: info
-    required: true
-    selector:
-      - info
-      - debug
-      - warn
-      - error
+  v2ray_version: latest
+  v2raya_version: latest
 schema:
-  log_level:
-    type: string
-    enum:
-      - info
-      - debug
-      - warn
-      - error
-image: mzz2017/v2raya:latest
+  v2ray_version: str
+  v2raya_version: str

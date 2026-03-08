@@ -1,15 +1,33 @@
 {
-  "name": "wzh Home Assistant Add-ons",
-  "url": "https://github.com/zj1wang/wzh_ha_addons",
-  "maintainer": "Your Name <your.email@example.com>",
+  "name": "WZH Home Assistant Add-ons",
+  "url": "https://github.com/yourusername/wzh_ha_addons",
+  "maintainer": "WZH",
   "addons": [
     {
-      "name": "v2raya",
-      "version": "1.1.0",
+      "name": "V2rayA",
+      "version": "1.0.0",
       "slug": "v2raya",
-      "description": "A modern web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan, NaiveProxy, HTTP(S) and SSH",
-      "url": "https://github.com/mzz2017/v2raya",
-      "arch": ["amd64", "armhf", "armv7", "aarch64"]
+      "description": "V2rayA is a modern web GUI client for V2Ray",
+      "url": "https://github.com/v2rayA/v2rayA",
+      "arch": ["amd64", "armhf", "armv7", "aarch64"],
+      "startup": "services",
+      "boot": "auto",
+      "host_network": true,
+      "ports": {
+        "2017/tcp": 2017
+      },
+      "map": [
+        "share:rw",
+        "config:rw"
+      ],
+      "options": {
+        "v2ray_version": "latest",
+        "v2raya_version": "latest"
+      },
+      "schema": {
+        "v2ray_version": "str",
+        "v2raya_version": "str"
+      }
     }
   ]
 }
