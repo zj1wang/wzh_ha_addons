@@ -1,19 +1,18 @@
 FROM mzz2017/v2raya:latest
 
-# 设置环境变量
-ENV V2RAYA_LOG_FILE=/tmp/v2raya.log
-ENV V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
-ENV V2RAYA_NFTABLES_SUPPORT=off
-ENV IPTABLES_MODE=legacy
-
-# 创建必要的目录
-RUN mkdir -p /etc/v2raya /var/log/v2raya
+# 添加健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:2017/api/system/status || exit 1
 
 # 复制启动脚本
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
 # 暴露端口
-EXPOSE 2017 20170 20171 20172
+EXPOSE 2017
 
-ENTRYPOINT ["/run.sh"]
+# 设置工作目录
+WORKDIR /root
+
+# 启动命令
+CMD ["/run.sh"]
