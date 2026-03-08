@@ -1,40 +1,19 @@
-FROM alpine:latest
+FROM mzz2017/v2raya:latest
 
-RUN apk add --no-cache \
-    curl \
-    wget \
-    unzip \
-    supervisor \
-    iptables \
-    libcap
+# 设置环境变量
+ENV V2RAYA_LOG_FILE=/tmp/v2raya.log
+ENV V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+ENV V2RAYA_NFTABLES_SUPPORT=off
+ENV IPTABLES_MODE=legacy
 
-WORKDIR /opt
+# 创建必要的目录
+RUN mkdir -p /etc/v2raya /var/log/v2raya
 
-# 下载并安装V2Ray
-RUN V2RAY_VERSION=$(curl -s https://api.github.com/repos/v2ray/v2ray-core/releases/latest | grep tag_name | cut -d '"' -f 4) && \
-    wget https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip && \
-    unzip v2ray-linux-64.zip && \
-    rm v2ray-linux-64.zip && \
-    chmod +x v2ray v2ctl
-
-# 下载并安装V2rayA
-RUN V2RAYA_VERSION=$(curl -s https://api.github.com/repos/v2rayA/v2rayA/releases/latest | grep tag_name | cut -d '"' -f 4) && \
-    wget https://github.com/v2rayA/v2rayA/releases/download/${V2RAYA_VERSION}/v2raya_linux_amd64.tar.gz && \
-    tar -xzf v2raya_linux_amd64.tar.gz && \
-    rm v2raya_linux_amd64.tar.gz && \
-    chmod +x v2raya
-
-# 配置supervisor
-RUN mkdir -p /etc/supervisor/conf.d
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# 配置V2rayA
-RUN mkdir -p /etc/v2raya
-
-# 复制运行脚本
+# 复制启动脚本
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
-EXPOSE 2017
+# 暴露端口
+EXPOSE 2017 20170 20171 20172
 
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]
