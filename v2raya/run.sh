@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/env bashio
 
 # 读取配置
 V2RAY_BIN=$(bashio::config 'v2ray_bin')
@@ -15,6 +15,11 @@ export IPTABLES_MODE="${IPTABLES_MODE}"
 # 创建必要的目录
 mkdir -p /etc/v2raya
 mkdir -p /data/v2raya
+
+# 如果存在/data/v2raya目录，创建符号链接
+if [ -d /data/v2raya ]; then
+    ln -sf /data/v2raya /etc/v2raya
+fi
 
 bashio::log.info "Starting V2rayA..."
 bashio::log.info "V2Ray binary: ${V2RAYA_V2RAY_BIN}"
