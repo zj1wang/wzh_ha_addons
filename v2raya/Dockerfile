@@ -13,4 +13,4 @@ RUN chmod +x /run.sh
 # 暴露端口
 EXPOSE 2017 20170 20171 20172
 
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]
