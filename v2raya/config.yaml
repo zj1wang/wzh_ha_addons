@@ -1,8 +1,9 @@
 name: V2rayA
-version: 1.0.0
-description: V2rayA is a modern web GUI client for V2Ray
+version: 2.2.6.3
 slug: v2raya
+description: V2rayA is a modern web GUI client for V2Ray
 url: https://github.com/v2rayA/v2rayA
+image: mzz2017/v2raya
 arch:
   - amd64
   - armhf
@@ -11,14 +12,28 @@ arch:
 startup: services
 boot: auto
 host_network: true
+privileged: true
 ports:
   2017/tcp: 2017
+  20170/tcp: 20170
+  20171/tcp: 20171
+  20172/tcp: 20172
+ports_description:
+  2017/tcp: Web管理界面
+  20170/tcp: SOCKS5代理
+  20171/tcp: HTTP代理
+  20172/tcp: 透明代理
 map:
   - share:rw
   - config:rw
+  - ssl
 options:
-  v2ray_version: latest
-  v2raya_version: latest
+  v2ray_bin: /usr/local/bin/v2ray
+  nftables_support: false
+  iptables_mode: legacy
+  log_file: /tmp/v2raya.log
 schema:
-  v2ray_version: str
-  v2raya_version: str
+  v2ray_bin: str
+  nftables_support: bool
+  iptables_mode: list(legacy|nftables)
+  log_file: str
