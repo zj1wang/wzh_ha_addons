@@ -9,4 +9,4 @@ RUN chmod +x /run.sh
 
 EXPOSE 2017
 
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]
