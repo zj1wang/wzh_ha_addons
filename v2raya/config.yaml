@@ -1,0 +1,24 @@
+name: V2rayA
+version: 1.0.0
+description: V2rayA is a modern web GUI client for V2Ray
+slug: v2raya
+url: https://github.com/v2rayA/v2rayA
+arch:
+  - amd64
+  - armhf
+  - armv7
+  - aarch64
+startup: services
+boot: auto
+host_network: true
+ports:
+  2017/tcp: 2017
+map:
+  - share:rw
+  - config:rw
+options:
+  v2ray_version: latest
+  v2raya_version: latest
+schema:
+  v2ray_version: str
+  v2raya_version: str
