@@ -8,7 +8,7 @@ This repository contains Home Assistant add-ons developed by wzh.
 
 A modern web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan, NaiveProxy, HTTP(S) and SSH.
 
-- **Version**: 1.0.0
+- **Version**: 1.1.0
 - **Description**: A modern web GUI client of Project V
 - **URL**: https://github.com/mzz2017/v2raya
 

@@ -5,7 +5,7 @@
   "addons": [
     {
       "name": "v2raya",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "slug": "v2raya",
       "description": "A modern web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan, NaiveProxy, HTTP(S) and SSH",
       "url": "https://github.com/mzz2017/v2raya",
