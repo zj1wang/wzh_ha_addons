@@ -1,6 +1,5 @@
 {
   "name": "WZH Home Assistant Add-ons",
   "url": "https://github.com/zj1wang/wzh_ha_addons",
-  "maintainer": "WZH",
-  "addons": ["v2raya"]
+  "maintainer": "WZH"
 }

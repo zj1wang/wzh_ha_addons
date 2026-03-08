@@ -34,4 +34,3 @@ schema:
   nftables_support: bool
   iptables_mode: list(legacy|nftables)
   log_file: str
-image: mzz2017/v2raya
