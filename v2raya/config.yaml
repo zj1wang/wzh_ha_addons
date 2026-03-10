@@ -11,12 +11,13 @@ arch:
 startup: services
 boot: auto
 host_network: true
+privileged: true
 ports:
   2017/tcp: 2017
 map:
   - share:rw
   - config:rw
-  - /etc/v2raya:/etc/v2raya:rw
+  - addon_config:rw
 options:
   v2ray_version: latest
   v2raya_version: latest
