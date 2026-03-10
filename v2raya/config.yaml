@@ -1,5 +1,5 @@
 name: V2rayA
-version: 1.0.0
+version: 1.0.1
 description: V2rayA is a modern web GUI client for V2Ray
 slug: v2raya
 url: https://github.com/v2rayA/v2rayA
@@ -11,11 +11,13 @@ arch:
 startup: services
 boot: auto
 host_network: true
+privileged: true
 ports:
   2017/tcp: 2017
 map:
   - share:rw
   - config:rw
+  - /etc/v2raya:/etc/v2raya:rw
 options:
   v2ray_version: latest
   v2raya_version: latest
