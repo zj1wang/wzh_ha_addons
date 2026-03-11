@@ -1,0 +1,15 @@
+version: '3'
+services:
+  v2raya:
+    image: mzz2017/v2raya:latest
+    container_name: v2raya
+    network_mode: host
+    privileged: true
+    environment:
+      - V2RAYA_USERNAME=${username:-admin}
+      - V2RAYA_PASSWORD=${password:-admin}
+    volumes:
+      - ./data:/etc/v2raya
+      - /lib/modules:/lib/modules:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
