@@ -5,7 +5,7 @@
   "addons": [
     {
       "name": "V2rayA",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "slug": "v2raya",
       "description": "V2rayA is a modern web GUI client for V2Ray",
       "url": "https://github.com/v2rayA/v2rayA",
