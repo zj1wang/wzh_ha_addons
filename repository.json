@@ -5,7 +5,7 @@
   "addons": [
     {
       "name": "V2rayA",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "slug": "v2raya",
       "description": "V2rayA is a modern web GUI client for V2Ray",
       "url": "https://github.com/v2rayA/v2rayA",
@@ -18,8 +18,12 @@
       },
       "map": [
         "share:rw",
-        "config:rw"
+        "config:rw",
+        "addon_config:/etc/v2raya:rw"
       ],
+      "docker": {
+        "privileged": true
+      },
       "options": {
         "v2ray_version": "latest",
         "v2raya_version": "latest"
