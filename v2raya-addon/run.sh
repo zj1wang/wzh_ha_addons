@@ -1,19 +1,17 @@
-# 引用官方多架构镜像
-FROM mzz2017/v2raya:latest
+#!/usr/bin/env bash
+set -e
 
-# 安装必要依赖：bash (运行脚本), ca-certificates (证书), iproute2/iptables (网络管理)
-RUN apk add --no-cache \
-    bash \
-    ca-certificates \
-    iptables \
-    ip6tables \
-    iproute2
+echo "[Info] Starting v2rayA with Ingress support..."
 
-# 拷贝启动脚本
-COPY run.sh /
-RUN chmod a+x /run.sh
+# 定义配置目录（持久化）
+CONF_DIR="/config/v2raya"
+mkdir -p "$CONF_DIR"
 
-# v2rayA 默认端口
-EXPOSE 2017 1080 1088
-
-CMD [ "/run.sh" ]
+# 运行 v2rayA
+# 注意：--v2raya-address 必须监听 0.0.0.0 以允许 HA 内部转发
+# 如果你使用 Ingress，v2rayA 官方镜像通常能自动处理相对路径
+# 如果页面显示空白，可以尝试增加参数 --v2raya-webdir
+/usr/bin/v2raya \
+    --v2raya-confdir "$CONF_DIR" \
+    --v2raya-address "0.0.0.0:2017" \
+    --v2raya-log-level "info"
