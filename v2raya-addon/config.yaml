@@ -1,17 +1,23 @@
-name: "v2rayA for HA"
-description: "A web GUI client of Project V with Ingress support."
-version: "1.1.0"
+name: "v2rayA Official"
+description: "基于 mzz2017/v2raya 官方镜像的 Home Assistant 加载项"
+version: "2.2.5"
 slug: "v2raya"
 arch:
   - aarch64
   - amd64
-# 开启 Ingress 功能
+  - armv7
+startup: services
+boot: auto
+# 开启宿主机网络模式，透明代理必选
+host_network: true
+# 开启 Ingress，支持从 HA 侧边栏直接访问
 ingress: true
 ingress_port: 2017
-panel_icon: "mdi:security-network"
+panel_icon: "mdi:alpha-v-box"
 panel_title: "v2rayA"
-# 如果你需要透明代理，建议开启 host_network
-host_network: true
+# 给予网络管理权限，用于透明代理设置 iptables
+privileged:
+  - NET_ADMIN
 map:
   - config:rw
 options:
